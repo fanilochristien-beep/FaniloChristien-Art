@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fanilo Art - Site Dessin PRO</title>
+
+<!-- Font Awesome pour icônes -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Particles.js -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+<style>
+/* RESET & BODY */
+*{margin:0; padding:0; box-sizing:border-box; font-family:Arial;}
+body{color:white; min-height:100vh; overflow-x:hidden;}
+
+/* Arrière-plan étoiles */
+#particles-js{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  z-index:-1;
+  background:linear-gradient(to right,#2c5364,#203a43,#0f2027);
+}
+
+/* HEADER & LOGO ANIMÉ */
+header{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:20px; background:rgba(0,0,0,0.3);
+}
+
+.logo{font-size:28px; font-weight:bold; display:flex; align-items:center; gap:10px;}
+.logo-icon{display:inline-block; animation: bounce 2s infinite;}
+.logo-text{display:inline-block; animation: slideText 3s infinite alternate; color:#fff;}
+
+@keyframes bounce{
+  0%,100%{transform: translateY(0);}
+  50%{transform: translateY(-10px) rotate(-10deg);}
+}
+@keyframes slideText{
+  0%{transform: translateX(0); color:#fff;}
+  50%{transform: translateX(5px); color:#ffd700;}
+  100%{transform: translateX(0); color:#fff;}
+}
+
+nav a{color:white; margin-left:20px; text-decoration:none; font-weight:bold; cursor:pointer;}
+
+/* HERO */
+.hero{text-align:center; padding:60px;}
+.hero h1{font-size:45px;}
+.hero p{margin-top:10px;}
+
+/* GALERIE */
+.galerie{padding:40px; display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px;}
+.card{background:white; border-radius:10px; overflow:hidden; color:black; transition:0.3s;}
+.card:hover{transform:scale(1.05);}
+.card img{width:100%;}
+.card p{padding:10px; text-align:center;}
+
+/* METEO */
+.weather{text-align:center; padding:30px;}
+.weather-box{display:inline-block; background:rgba(0,0,0,0.3); padding:20px; border-radius:10px;}
+
+/* FOOTER */
+footer{background:black; padding:20px; text-align:center; margin-top:30px;}
+footer i{margin:10px; font-size:20px; cursor:pointer;}
+
+/* CONTACT MODAL */
+.modal{display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.7);}
+.modal-content{background: rgba(0,0,0,0.9); margin:10% auto; padding:30px; border-radius:10px; width:90%; max-width:500px; color:white; box-shadow:0 0 15px #ffd700; animation: slideDown 0.5s;}
+.close{color: #fff; float:right; font-size:28px; font-weight:bold; cursor:pointer;}
+.close:hover{color:#ffd700;}
+@keyframes slideDown{from{transform:translateY(-50px); opacity:0;} to{transform:translateY(0); opacity:1;}}
+
+.modal-content input, .modal-content textarea{width:100%; padding:10px; margin-top:5px; border-radius:5px; border:none;}
+.modal-content button{margin-top:10px; padding:10px 20px; border:none; border-radius:5px; background:#ffd700; font-weight:bold; cursor:pointer; transition:0.3s;}
+.modal-content button:hover{background:#ffbf00; box-shadow:0 0 10px #ffd700;}
+</style>
+</head>
+
+<body>
+
+<!-- Particles arrière-plan -->
+<div id="particles-js"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo"><span class="logo-icon">💻</span><span class="logo-text">Fanilo Christien R.</span></div>
+  <nav>
+    <a href="#">Accueil</a>
+    <a href="#">Galerie</a>
+    <a href="#contact" id="contactMenu">Contact</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Bienvenue dans mon univers de dessin</h1>
+  <p>Découvrez mes créations artistiques</p>
+</section>
+
+<!-- GALERIE -->
+<section class="galerie">
+  <div class="card"><img src="https://picsum.photos/400?1"><p>Dessin artistique</p></div>
+  <div class="card"><img src="https://picsum.photos/400?2"><p>Illustration</p></div>
+  <div class="card"><img src="https://picsum.photos/400?3"><p>Art digital</p></div>
+  <div class="card"><img src="https://picsum.photos/400?4"><p>Sketch</p></div>
+</section>
+
+<!-- METEO -->
+<section class="weather">
+  <h2>Météo aujourd'hui</h2>
+  <div class="weather-box">
+    <p id="meteo">Chargement météo...</p>
+  </div>
+</section>
+
+<!-- CONTACT MODAL -->
+<div id="contactModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Contactez-moi</h2>
+    <form action="https://formsubmit.co/fanilochristien@gmail.com" method="POST">
+      <input type="hidden" name="_captcha" value="false">
+      <label for="name">Nom:</label><br>
+      <input type="text" id="name" name="name" placeholder="Votre nom" required><br><br>
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="email" placeholder="Votre email" required><br><br>
+      <label for="message">Message:</label><br>
+      <textarea id="message" name="message" rows="5" placeholder="Votre message" required></textarea><br><br>
+      <button type="submit">Envoyer</button>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Suivez-moi</p>
+  <i class="fab fa-facebook"></i>
+  <i class="fab fa-whatsapp"></i>
+  <i class="fab fa-instagram"></i>
+  <p>© 2026 RANDRIAMPARANIAINA Jean Fanilo Christien ‖ Art ‖ R.G</p>
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+// Particles.js config
+particlesJS("particles-js", {
+  "particles": {
+    "number":{"value":120},
+    "color":{"value":"#ffffff"},
+    "shape":{"type":"circle"},
+    "opacity":{"value":0.5},
+    "size":{"value":3},
+    "move":{"enable":true,"speed":2}
+  },
+  "interactivity": {
+    "events":{"onhover":{"enable":true,"mode":"repulse"}}
+  },
+  "retina_detect":true
+});
+
+// Météo
+const apiKey="YOUR_API_KEY"; // soloy amin'ny api key-nao OpenWeatherMap
+const ville="Antananarivo";
+fetch(`https://api.openweathermap.org/data/2.5/weather?q=${ville}&appid=${apiKey}&units=metric&lang=fr`)
+.then(response=>response.json())
+.then(data=>{
+  document.getElementById("meteo").innerHTML=
+  data.name+"<br>"+data.main.temp+" °C<br>"+data.weather[0].description;
+});
+
+// Modal contact
+const modal=document.getElementById("contactModal");
+const contactMenu=document.getElementById("contactMenu");
+const closeBtn=document.querySelector(".close");
+
+contactMenu.addEventListener("click",function(e){
+  e.preventDefault();
+  modal.style.display="block";
+});
+closeBtn.addEventListener("click",function(){modal.style.display="none";});
+window.addEventListener("click",function(e){
+  if(e.target==modal){modal.style.display="none";}
+});
+</script>
+
+</body>
+</html>
